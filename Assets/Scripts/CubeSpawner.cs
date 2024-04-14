@@ -7,6 +7,8 @@ public class CubeSpawner : MonoBehaviour
     [SerializeField] GameObject[] cubes;
     [SerializeField] Transform[] points;
     [SerializeField] float beat;
+    [SerializeField] BeatMap beatMap;
+    
     private float timer;
 
     // Start is called before the first frame update
