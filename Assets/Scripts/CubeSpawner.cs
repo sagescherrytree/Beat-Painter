@@ -9,7 +9,7 @@ public class CubeSpawner : MonoBehaviour
 
     [SerializeField] float beat;
     [SerializeField] BeatMap beatMap;
-    
+
     private float timer;
 
     // Start is called before the first frame update
@@ -27,22 +27,24 @@ public class CubeSpawner : MonoBehaviour
 
             if (posToSpawn == 0)
             {
-                GameObject blueCube = cubes[1];
-                Transform pointLeft = points[0];
-                GameObject cube = Instantiate(blueCube, pointLeft);
-                cube.transform.localPosition = Vector3.zero;
-                cube.transform.Rotate(transform.forward, 90 * Random.Range(0, 4));
-                timer -= beat;
-                
-            } else if (posToSpawn == 1)
-            {
                 GameObject redCube = cubes[0];
-                Transform pointRight = points[1];
-                GameObject cube = Instantiate(redCube, pointRight);
+                Transform pointLeft = points[0];
+                GameObject cube = Instantiate(redCube, pointLeft);
                 cube.transform.localPosition = Vector3.zero;
                 cube.transform.Rotate(transform.forward, 90 * Random.Range(0, 4));
                 timer -= beat;
-            } else if (posToSpawn == 2 || posToSpawn == 3)
+
+            }
+            else if (posToSpawn == 1)
+            {
+                GameObject blueCube = cubes[1];
+                Transform pointRight = points[1];
+                GameObject cube = Instantiate(blueCube, pointRight);
+                cube.transform.localPosition = Vector3.zero;
+                cube.transform.Rotate(transform.forward, 90 * Random.Range(0, 4));
+                timer -= beat;
+            }
+            else if (posToSpawn == 2 || posToSpawn == 3)
             {
                 GameObject cube = Instantiate(cubes[Random.Range(0, 2)], points[Random.Range(2, 4)]);
                 cube.transform.localPosition = Vector3.zero;
