@@ -7634,6 +7634,7 @@ MonoBehaviour:
   - {fileID: 1274791302}
   beat: 1.47
   beatMap: {fileID: 1919029831}
+  audio: {fileID: 1919029832}
 --- !u!114 &1919029831
 MonoBehaviour:
   m_ObjectHideFlags: 0

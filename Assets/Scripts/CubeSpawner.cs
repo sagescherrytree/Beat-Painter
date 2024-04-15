@@ -6,6 +6,7 @@ public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] cubes;
     [SerializeField] Transform[] points;
+
     [SerializeField] float beat;
     [SerializeField] BeatMap beatMap;
     
@@ -22,10 +23,32 @@ public class CubeSpawner : MonoBehaviour
     {
         if (timer > beat)
         {
-            GameObject cube = Instantiate(cubes[Random.Range(0, 2)], points[Random.Range(0, 4)]);
-            cube.transform.localPosition = Vector3.zero;
-            cube.transform.Rotate(transform.forward, 90 * Random.Range(0, 4));
-            timer -= beat;
+            int posToSpawn = Random.Range(0, 4);
+
+            if (posToSpawn == 0)
+            {
+                GameObject blueCube = cubes[1];
+                Transform pointLeft = points[0];
+                GameObject cube = Instantiate(blueCube, pointLeft);
+                cube.transform.localPosition = Vector3.zero;
+                cube.transform.Rotate(transform.forward, 90 * Random.Range(0, 4));
+                timer -= beat;
+                
+            } else if (posToSpawn == 1)
+            {
+                GameObject redCube = cubes[0];
+                Transform pointRight = points[1];
+                GameObject cube = Instantiate(redCube, pointRight);
+                cube.transform.localPosition = Vector3.zero;
+                cube.transform.Rotate(transform.forward, 90 * Random.Range(0, 4));
+                timer -= beat;
+            } else if (posToSpawn == 2 || posToSpawn == 3)
+            {
+                GameObject cube = Instantiate(cubes[Random.Range(0, 2)], points[Random.Range(2, 4)]);
+                cube.transform.localPosition = Vector3.zero;
+                cube.transform.Rotate(transform.forward, 90 * Random.Range(0, 4));
+                timer -= beat;
+            }
         }
         timer += Time.deltaTime;
     }
