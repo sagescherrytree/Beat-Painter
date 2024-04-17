@@ -4,7 +4,22 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/HomeScreen.unity
+    guid: 469de8f48239f93468a3533059b21975
+  - enabled: 1
+    path: Assets/Scenes/LevelSelectScreen.unity
+    guid: 80aaad728ca939047a30681ab4c06169
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/LossScreen.unity
+    guid: d004f059a5878d14f8e07568450ebafc
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 5cb1c8749ebe91a4d853814797c4143c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: aacf43176268bf741ac568fc64779f4b, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 86b73507173ff97448a29ddfe5f9908a, type: 2}
