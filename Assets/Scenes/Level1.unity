@@ -912,6 +912,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 128
+  canvas: {fileID: 607194787}
 --- !u!1 &662421235
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +927,7 @@ GameObject:
   - component: {fileID: 662421237}
   m_Layer: 6
   m_Name: saber_left
-  m_TagString: Untagged
+  m_TagString: left
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6838,6 +6839,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 256
+  canvas: {fileID: 607194787}
 --- !u!1 &1274791301
 GameObject:
   m_ObjectHideFlags: 0
@@ -7955,7 +7957,7 @@ GameObject:
   - component: {fileID: 1981592027}
   m_Layer: 6
   m_Name: saber_right
-  m_TagString: Untagged
+  m_TagString: right
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
