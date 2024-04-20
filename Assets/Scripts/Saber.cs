@@ -12,7 +12,6 @@ public class Saber : MonoBehaviour
     private MeshRenderer canvasRenderer;
     private Material[] canvasMats;
     private int counter;
-    private bool isMatVisible = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +23,12 @@ public class Saber : MonoBehaviour
             Debug.Log("Error: Canvas MeshRenderer does not exist.");
         }
         canvasMats = canvasRenderer.materials;
+
+        // Toggle off visibility for all materials in the list.
+        foreach (Material mat in canvasMats)
+        {
+            ToggleMatVisibility(false, mat);
+        }
     }
 
     // Update is called once per frame
@@ -35,7 +40,8 @@ public class Saber : MonoBehaviour
             if (Vector3.Angle(transform.position - previousPosition, hit.transform.up) > 130)
             {
                 Destroy(hit.transform.gameObject);
-                ChangeMaterial(counter++);
+                ChangeMaterial(counter);
+                counter++;
                 Debug.Log("Found cube!");
             }
         }
@@ -44,18 +50,29 @@ public class Saber : MonoBehaviour
 
     void ChangeMaterial(int counter)
     {
-        Material mat = canvasMats[counter];
-        isMatVisible = !isMatVisible;
+        Debug.Log("counter: " + counter);
         if (counter < canvasMats.Length)
         {
-            mat.SetInt("_SrcBlend", isMatVisible ? (int)UnityEngine.Rendering.BlendMode.One : (int)UnityEngine.Rendering.BlendMode.Zero);
-            mat.SetInt("_DstBlend", isMatVisible ? (int)UnityEngine.Rendering.BlendMode.Zero : (int)UnityEngine.Rendering.BlendMode.One);
-            mat.SetInt("_ZWrite", isMatVisible ? 1 : 0);
-            mat.DisableKeyword("_ALPHATEST_ON");
-            mat.DisableKeyword("_ALPHABLEND_ON");
-            mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-            mat.renderQueue = isMatVisible ? -1 : 3000;
+            Material mat = canvasMats[counter];
+            //isMatVisible = !isMatVisible;
+            ToggleMatVisibility(true, mat);
             Debug.Log("Colour change.");
         }
+        else
+        {
+            Debug.Log("Counter is amongus.");
+        }
+    }
+
+    void ToggleMatVisibility(bool isMatVisible, Material mat)
+    {
+        mat.SetInt("_SrcBlend", isMatVisible ? (int)UnityEngine.Rendering.BlendMode.One : (int)UnityEngine.Rendering.BlendMode.Zero);
+        mat.SetInt("_DstBlend", isMatVisible ? (int)UnityEngine.Rendering.BlendMode.Zero : (int)UnityEngine.Rendering.BlendMode.One);
+        mat.SetInt("_ZWrite", isMatVisible ? 0 : 1);
+        mat.DisableKeyword("_ALPHATEST_ON");
+        mat.DisableKeyword("_ALPHABLEND_ON");
+        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mat.renderQueue = isMatVisible ? 3000 : -1;
+        Debug.Log("Mat toggle.");
     }
 }
