@@ -14,7 +14,6 @@ public struct GhostStrokeInitData
 
 public class GhostStrokeSpawner : MonoBehaviour
 {
-    [SerializeField] private string filename;
     [SerializeField] StrokePointsRecord strokePoints;
     
     // TODO: use a list of initData w/ list of spawn times
@@ -36,11 +35,11 @@ public class GhostStrokeSpawner : MonoBehaviour
         var ghostStroke = Instantiate(ghostStrokePrefab).GetComponent<GhostStroke>();
         
         // TODO: Create strokes in update loop, not at start
-        var list = strokePoints.strokes[_initData.Index].data
-            .Select(v => (Vector2) _initData.transform.TransformPoint(v))
-            .ToList();
+        var positions = strokePoints.strokes[_initData.Index].data
+            .Select(v => _initData.transform.TransformPoint(v))
+            .ToArray();
         
-        ghostStroke.Init(list);
+        ghostStroke.Init(positions);
     }
 
 }

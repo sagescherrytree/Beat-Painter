@@ -17,55 +17,80 @@ public class GhostStroke : MonoBehaviour
     private static readonly int StrokeLength = Shader.PropertyToID("_StrokeLength");
     private static readonly int FillLength = Shader.PropertyToID("_FillLength");
     private const float TargetHover = 0.1f;
-    
-    [SerializeField] private float startZ = 0;
-    [SerializeField] private float endZ = -25;
-    [SerializeField] private float speed = -2;
+
+    [SerializeField] private float endZ;
+    [SerializeField] private float speed;
     [SerializeField] private GameObject targetPrefab;
+    [SerializeField] private float lifeTime;
     
     private List<GhostStrokeTarget> _targetInstances;
     private int _activeIndex;
-    
+
+    private Vector3[] _positions;
     private LineRenderer _renderer;
     private List<float> _fillLengths;
 
-    // Start is called before the first frame update
-    void Start()
+    private void FixedUpdate()
     {
+        if (_activeIndex >= 0)
+        {
+            lifeTime -= Time.deltaTime;
+            if (lifeTime <= 0)
+            {
+                Miss();
+            }
+            return;
+        }
+        var currZ = _positions[0].z;
+        currZ += speed * Time.deltaTime;
+        if (endZ > currZ)
+        {
+            currZ = endZ;
+            _activeIndex = 0;
+        }
+        for (var i = 0; i < _positions.Length; i++)
+        {
+            _positions[i].z = currZ;
+        }
+        _renderer.SetPositions(_positions);
+        if (_activeIndex == 0)
+        {
+            SpawnTargets();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Init(Vector3[] positions)
     {
-        
-    }
-
-    public void Init(List<Vector2> points)
-    {
-        _activeIndex = 0;
+        _positions = positions;
+        _activeIndex = -1;
         _renderer = gameObject.GetComponent<LineRenderer>();
-        _targetInstances = new();
         _fillLengths = new();
         
-        for (var i = 0; i < points.Count; i++)
+        _renderer.positionCount = positions.Length;
+        _renderer.SetPositions(positions);
+        var fillLength = 0f;
+        for (var i = 1; i < positions.Length; i++)
         {
-            var target = Instantiate(targetPrefab, new Vector3(points[i].x, points[i].y, startZ - TargetHover), Quaternion.identity)
+            _fillLengths.Add(fillLength);
+            fillLength += (positions[i] - positions[i - 1]).magnitude;
+        }
+        _fillLengths.Add(fillLength);
+        _renderer.material.SetFloat(StrokeLength, fillLength);
+    }
+
+    public void SpawnTargets()
+    {
+        _targetInstances = new();
+        for (var i = 0; i < _positions.Length; i++)
+        {
+            var spawnPos = _positions[i];
+            spawnPos.z -= TargetHover;
+            var target = Instantiate(targetPrefab, spawnPos, Quaternion.identity)
                 .GetComponent<GhostStrokeTarget>();
             target.Init(i, this);
             _targetInstances.Add(target);
         }
         _targetInstances[0].State = TargetState.Active;
-        
-        _renderer.positionCount = points.Count;
-        _renderer.SetPositions(points.Select(point => new Vector3(point.x, point.y, startZ)).ToArray());
-        var fillLength = 0f;
-        for (var i = 1; i < points.Count; i++)
-        {
-            _fillLengths.Add(fillLength);
-            fillLength += (points[i] - points[i - 1]).magnitude;
-        }
-        _fillLengths.Add(fillLength);
-        _renderer.material.SetFloat(StrokeLength, fillLength);
     }
 
     public void HitTarget(int hitIndex)
@@ -82,17 +107,29 @@ public class GhostStroke : MonoBehaviour
         }
         else
         {
-            // TODO: logic for completed stroke
-            foreach (var target in _targetInstances)
-            {
-                Destroy(target.gameObject);
-            }
-            Destroy(gameObject);
+            Complete();
         }
+    }
+
+    private void Complete()
+    {
+        Destroy(gameObject);
+    }
+
+    private void Miss()
+    {
+        Destroy(gameObject);
     }
 
     public void OnDestroy()
     {
-        
+        if (_targetInstances == null)
+        {
+            return;
+        }
+        foreach (var target in _targetInstances)
+        {
+            Destroy(target.gameObject);
+        }
     }
 }

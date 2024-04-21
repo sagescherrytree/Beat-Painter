@@ -124,8 +124,8 @@ LineRenderer:
       m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 10
-    numCapVertices: 10
+    numCornerVertices: 5
+    numCapVertices: 0
     alignment: 0
     textureMode: 1
     textureScale: {x: 1, y: 1}
@@ -147,4 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1613a9f38d045cd9dcb2a3ebb776ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endZ: 10
+  speed: -2
   targetPrefab: {fileID: 9027039027238369111, guid: edf8839129b9a4b849db80cbc3bb49e4, type: 3}
+  lifeTime: 2
