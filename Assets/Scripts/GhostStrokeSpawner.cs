@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ public struct GhostStrokeInitData
 public class GhostStrokeSpawner : MonoBehaviour
 {
     [SerializeField] private string filename;
-    private List<List<Vector2>> _strokePoints;
+    [SerializeField] StrokePointsRecord strokePoints;
     
     // TODO: use a list of initData w/ list of spawn times
     private GhostStrokeInitData _initData;
@@ -24,7 +25,6 @@ public class GhostStrokeSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _strokePoints = StrokeReader.ReadStrokes(filename);
         _initData = new GhostStrokeInitData
         {
             Index = 0,
@@ -36,21 +36,11 @@ public class GhostStrokeSpawner : MonoBehaviour
         var ghostStroke = Instantiate(ghostStrokePrefab).GetComponent<GhostStroke>();
         
         // TODO: Create strokes in update loop, not at start
-        var list = _strokePoints[_initData.Index]
+        var list = strokePoints.strokes[_initData.Index].data
             .Select(v => (Vector2) _initData.transform.TransformPoint(v))
             .ToList();
         
         ghostStroke.Init(list);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SpawnGhostStroke()
-    {
-        
-    }
 }
