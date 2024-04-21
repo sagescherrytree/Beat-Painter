@@ -1,19 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GhostStrokeCreation
 {
     public class TraceMain : MonoBehaviour
     {
-        public string fileName;
-        public DrawTool drawTool;
-        public CanvasSwitcher canvasSwitcher;
-
-        private StrokeWriter _writer;
-        // Start is called before the first frame update
-        void Start()
-        {
-            _writer = new StrokeWriter(fileName);
-        }
+        [SerializeField] private StrokePointsRecord strokePoints;
+        [SerializeField] private DrawTool drawTool;
+        [SerializeField] private CanvasSwitcher canvasSwitcher;
+        
 
         // Update is called once per frame
         void Update()
@@ -25,13 +20,14 @@ namespace GhostStrokeCreation
 
             if (canvasSwitcher.HasNext())
             {
-                _writer.WriteStroke(drawTool.positions);
+                StrokePoints stroke = new StrokePoints();
+                stroke.data = drawTool.positions;
+                strokePoints.strokes.Add(stroke);
                 drawTool.NextStroke();
                 canvasSwitcher.NextStroke();
                 return;
             }
-        
-            _writer.Close();
+            
             Debug.Log("All traces finished");
         }
     }
