@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StrokeTransformCollector : MonoBehaviour
 {
     [SerializeField]
-    private StrokeTransforms StrokeTransforms;
+    private StrokeInitData strokeInitData;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,8 +14,8 @@ public class StrokeTransformCollector : MonoBehaviour
         {
             var child = transform.GetChild(i);
             var id = child.GetComponent<StrokeQuad>().id;
-            StrokeTransforms.transforms.Add(child);
-            StrokeTransforms.ids.Add(id);
+            strokeInitData.transforms.Add(child);
+            strokeInitData.ids.Add(id);
         }
     }
 }
