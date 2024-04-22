@@ -3,63 +3,60 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace DefaultNamespace
+public enum TargetState
 {
-    public enum TargetState
+    Active,
+    Inactive,
+    Hit,
+    Missed,
+}
+
+public class GhostStrokeTarget : MonoBehaviour
+{
+    [SerializeField]
+    private Material activeMat;
+    [SerializeField]
+    public Material inactiveMat;
+    [SerializeField]
+    public Material hitMat;
+    [SerializeField]
+    public Material missedMat;
+    public TargetState State
     {
-        Active,
-        Inactive,
-        Hit,
-        Missed,
+        get => _state;
+        set
+        {
+            _state = value;
+            var mat = value switch
+            {
+                TargetState.Active => activeMat,
+                TargetState.Inactive => inactiveMat,
+                TargetState.Hit => hitMat,
+                TargetState.Missed => missedMat,
+                _ => throw new Exception()
+            };
+            gameObject.GetComponent<MeshRenderer>().SetMaterials(new List<Material> { mat });
+        }
     }
-    
-    public class GhostStrokeTarget : MonoBehaviour
+
+    private int _index;
+    private GhostStroke _owner;
+    private TargetState _state;
+
+    public void Init(int index, GhostStroke owner)
     {
-        [SerializeField]
-        private Material activeMat;
-        [SerializeField]
-        public Material inactiveMat;
-        [SerializeField]
-        public Material hitMat;
-        [SerializeField]
-        public Material missedMat;
-        public TargetState State
-        {
-            get => _state;
-            set
-            {
-                _state = value;
-                var mat = value switch
-                {
-                    TargetState.Active => activeMat,
-                    TargetState.Inactive => inactiveMat,
-                    TargetState.Hit => hitMat,
-                    TargetState.Missed => missedMat,
-                    _ => throw new Exception()
-                };
-                gameObject.GetComponent<MeshRenderer>().SetMaterials(new List<Material> { mat });
-            }
-        }
+        _index = index;
+        _owner = owner;
+        State = TargetState.Inactive;
+    }
 
-        private int _index;
-        private GhostStroke _owner;
-        private TargetState _state;
-
-        public void Init(int index, GhostStroke owner)
+    public void Hit()
+    {
+        if (State is TargetState.Hit or TargetState.Missed)
         {
-            _index = index;
-            _owner = owner;
-            State = TargetState.Inactive;
+            return;
         }
-
-        public void Hit()
-        {
-            if (State is TargetState.Hit or TargetState.Missed)
-            {
-                return;
-            }
-            State = TargetState.Hit;
-            _owner.HitTarget(_index);
-        }
+        State = TargetState.Hit;
+        _owner.HitTarget(_index);
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -22,7 +21,7 @@ public class GhostStroke : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private GameObject targetPrefab;
     [SerializeField] private float lifeTime;
-    
+
     private List<GhostStrokeTarget> _targetInstances;
     private int _activeIndex;
 
@@ -70,7 +69,7 @@ public class GhostStroke : MonoBehaviour
         _activeIndex = -1;
         _renderer = gameObject.GetComponent<LineRenderer>();
         _fillLengths = new();
-        
+
         _renderer.positionCount = positions.Length;
         _renderer.SetPositions(positions);
         var fillLength = 0f;
