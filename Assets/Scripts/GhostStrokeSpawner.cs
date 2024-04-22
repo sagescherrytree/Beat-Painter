@@ -1,45 +1,38 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-
-public struct GhostStrokeInitData
-{
-    public int Index;
-    public PaintColor Color;
-    public Transform transform;
-}
+using UnityEngine.Serialization;
 
 public class GhostStrokeSpawner : MonoBehaviour
 {
-    [SerializeField] StrokePointsRecord strokePoints;
-    
-    // TODO: use a list of initData w/ list of spawn times
-    private GhostStrokeInitData _initData;
-    
-    [SerializeField]
-    private GameObject ghostStrokePrefab;
+    [SerializeField] private StrokePointsRecord strokePoints;
+    [SerializeField] private StrokeInitData initData;
+    [SerializeField] private GameObject ghostStrokePrefab;
+    [SerializeField] private float spawnRate;
     // Start is called before the first frame update
     void Start()
     {
-        _initData = new GhostStrokeInitData
+        StartCoroutine(SpawnRoutine());
+    }
+
+    IEnumerator SpawnRoutine()
+    {
+        var n = initData.ids.Count;
+        for (int i = 0; i < n; i++)
         {
-            Index = 0,
-            Color = PaintColor.Cyan,
-            transform = GetComponent<Transform>()
-        };
-        _initData.transform.localScale *= 10;
-        
-        var ghostStroke = Instantiate(ghostStrokePrefab).GetComponent<GhostStroke>();
-        
-        // TODO: Create strokes in update loop, not at start
-        var positions = strokePoints.strokes[_initData.Index].data
-            .Select(v => _initData.transform.TransformPoint(v))
-            .ToArray();
-        
-        ghostStroke.Init(positions);
+            var positions = strokePoints.strokes[initData.ids[i]].data
+                .Select(v =>
+                {
+                    var res = initData.mats[i].MultiplyPoint(v);
+                    res.z = transform.position.z;
+                    return res;
+                })
+                .ToArray();
+            var ghostStroke = Instantiate(ghostStrokePrefab).GetComponent<GhostStroke>();
+            ghostStroke.Init(positions);
+            yield return new WaitForSeconds(spawnRate);
+        }
     }
 
 }
