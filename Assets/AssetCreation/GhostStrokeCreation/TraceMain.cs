@@ -13,17 +13,17 @@ namespace GhostStrokeCreation
         // Update is called once per frame
         void Update()
         {
-            if (!Input.GetKeyDown(KeyCode.Space))
+            if (!Input.GetKeyDown(KeyCode.Space) || drawTool.positions.Count == 0)
             {
                 return;
             }
-
+            
+            StrokePoints stroke = new StrokePoints();
+            stroke.data = drawTool.positions;
+            strokePoints.strokes.Add(stroke);
+            drawTool.NextStroke();
             if (canvasSwitcher.HasNext())
             {
-                StrokePoints stroke = new StrokePoints();
-                stroke.data = drawTool.positions;
-                strokePoints.strokes.Add(stroke);
-                drawTool.NextStroke();
                 canvasSwitcher.NextStroke();
                 return;
             }
