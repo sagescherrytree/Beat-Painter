@@ -8,6 +8,7 @@ public class GhostStrokeSpawner : MonoBehaviour
 {
     [SerializeField] private StrokePointsRecord strokePoints;
     [SerializeField] private StrokeInitData initData;
+    [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject ghostStrokePrefab;
     [SerializeField] private float spawnRate;
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class GhostStrokeSpawner : MonoBehaviour
                 })
                 .ToArray();
             var ghostStroke = Instantiate(ghostStrokePrefab).GetComponent<GhostStroke>();
-            ghostStroke.Init(positions);
+            ghostStroke.Init(positions, canvas, i);
             yield return new WaitForSeconds(spawnRate);
         }
     }

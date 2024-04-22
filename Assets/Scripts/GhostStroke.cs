@@ -30,6 +30,9 @@ public class GhostStroke : MonoBehaviour
     private LineRenderer _renderer;
     private List<float> _fillLengths;
 
+    private int _canvasIndex;
+    private Canvas _canvas;
+
     private void FixedUpdate()
     {
         if (_activeIndex >= 0)
@@ -37,7 +40,7 @@ public class GhostStroke : MonoBehaviour
             lifeTime -= Time.deltaTime;
             if (lifeTime <= 0)
             {
-                Miss();
+                Complete();
             }
             return;
         }
@@ -59,9 +62,11 @@ public class GhostStroke : MonoBehaviour
         }
     }
 
-    public void Init(Vector3[] positions)
+    public void Init(Vector3[] positions, Canvas canvas, int canvasIndex)
     {
         _positions = positions;
+        _canvas = canvas;
+        _canvasIndex = canvasIndex;
         _activeIndex = -1;
         _renderer = gameObject.GetComponent<LineRenderer>();
         _fillLengths = new();
@@ -113,11 +118,11 @@ public class GhostStroke : MonoBehaviour
 
     private void Complete()
     {
-        Destroy(gameObject);
-    }
-
-    private void Miss()
-    {
+        var hitTargets = _targetInstances.Count(target => target.State == TargetState.Hit);
+        if (hitTargets > _targetInstances.Count / 2)
+        {
+            _canvas.Paint(_canvasIndex);
+        }
         Destroy(gameObject);
     }
 
@@ -129,7 +134,10 @@ public class GhostStroke : MonoBehaviour
         }
         foreach (var target in _targetInstances)
         {
-            Destroy(target.gameObject);
+            if (target != null)
+            {
+                Destroy(target.gameObject);
+            }
         }
     }
 }
