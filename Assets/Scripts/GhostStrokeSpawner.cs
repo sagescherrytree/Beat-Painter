@@ -26,7 +26,7 @@ public class GhostStrokeSpawner : MonoBehaviour
                 .Select(v =>
                 {
                     var res = initData.mats[i].MultiplyPoint(v);
-                    res.z = transform.position.z;
+                    res = gameObject.transform.TransformPoint(res);
                     return res;
                 })
                 .ToArray();

@@ -7,9 +7,12 @@ public class PaintBrush : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         RaycastHit hit;
+        Color color = Color.green;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
+            color = Color.red;
             var target = hit.transform.gameObject.GetComponent<GhostStrokeTarget>();
             if (target != null)
             {
@@ -17,5 +20,6 @@ public class PaintBrush : MonoBehaviour
                 target.Hit();
             }
         }
+        Debug.DrawRay(transform.position, transform.forward * 100, color);
     }
 }
