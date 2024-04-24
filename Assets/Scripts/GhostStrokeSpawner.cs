@@ -22,11 +22,14 @@ public class GhostStrokeSpawner : MonoBehaviour
         var n = initData.ids.Count;
         for (int i = 0; i < n; i++)
         {
+            var offset = initData.mats[i].GetColumn(3);
+            Vector3 translate = offset;
+            translate = translate.normalized * 4f;
             var positions = strokePoints.strokes[initData.ids[i]].data
                 .Select(v =>
                 {
-                    var res = initData.mats[i].MultiplyPoint(v);
-                    res = gameObject.transform.TransformPoint(res);
+                    // var res = initData.mats[i].MultiplyPoint(v);
+                    var res = gameObject.transform.TransformPoint(v) + translate;
                     return res;
                 })
                 .ToArray();
