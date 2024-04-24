@@ -150,4 +150,4 @@ MonoBehaviour:
   endZ: 3
   speed: -5
   targetPrefab: {fileID: 9027039027238369111, guid: edf8839129b9a4b849db80cbc3bb49e4, type: 3}
-  lifeTime: 4
+  lifeTime: 2
