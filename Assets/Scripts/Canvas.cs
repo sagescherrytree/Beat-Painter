@@ -19,5 +19,6 @@ public class Canvas : MonoBehaviour
     {
         blendMat.SetTexture(PaintTex, strokes[index]);
         texture.Update();
+        texture.Update();
     }
 }
