@@ -240,7 +240,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "0d1a53bd40f74f079549ac5a70be94ff",
     "m_Id": 0,
-    "m_DisplayName": "CanvasTex",
+    "m_DisplayName": "MainTex",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -285,10 +285,10 @@
     "m_Guid": {
         "m_GuidSerialized": "b72fea88-8b2f-4263-a837-4032085afee7"
     },
-    "m_Name": "CanvasTex",
+    "m_Name": "MainTex",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "CanvasTex",
-    "m_DefaultReferenceName": "_CanvasTex",
+    "m_RefNameGeneratedByDisplayName": "MainTex",
+    "m_DefaultReferenceName": "_MainTex",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -302,7 +302,7 @@
         "m_SerializedTexture": "{\"texture\":{\"fileID\":8600000,\"guid\":\"faeaa5c3fb3684a508dcecc6e9b06d25\",\"type\":2}}",
         "m_Guid": ""
     },
-    "isMainTexture": false,
+    "isMainTexture": true,
     "useTilingAndOffset": false,
     "m_Modifiable": true,
     "m_DefaultType": 0
