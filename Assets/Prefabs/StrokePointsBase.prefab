@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4974619012021571520}
   - component: {fileID: 4047768108738596223}
   m_Layer: 0
-  m_Name: StrokePointsRecord
+  m_Name: StrokePointsBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
