@@ -5,10 +5,16 @@ using UnityEngine;
 public class TestRaycaster : MonoBehaviour
 {
     private Camera _camera;
+
+    // simple counter
+    public int hits;
+
+
     // Start is called before the first frame update
     void Start()
     {
         _camera = GetComponent<Camera>();
+        hits = 0;
     }
 
     // Update is called once per frame
@@ -21,6 +27,8 @@ public class TestRaycaster : MonoBehaviour
             {
                 var target = hit.collider.gameObject.GetComponent<GhostStrokeTarget>();
                 target.Hit();
+
+                hits++;
             }
         }
     }

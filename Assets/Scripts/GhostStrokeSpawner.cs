@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static PaintBrush;
 
 public class GhostStrokeSpawner : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class GhostStrokeSpawner : MonoBehaviour
     [SerializeField] private GameObject ghostStrokePrefab;
     [SerializeField] private float spawnRate;
     [SerializeField] private float offset;
+
+    [SerializeField] private PaintBrush brush;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +42,14 @@ public class GhostStrokeSpawner : MonoBehaviour
             ghostStroke.Init(positions, canvas, i);
             yield return new WaitForSeconds(spawnRate);
         }
+        
+        int hits = brush.hits;
+        if (hits < n) {
+            SceneManager.LoadScene("LossScreen");
+        } else {
+            SceneManager.LoadScene("WinScreen");
+        }       
+
     }
 
 }

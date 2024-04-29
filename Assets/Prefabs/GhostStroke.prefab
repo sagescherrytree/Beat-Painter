@@ -148,11 +148,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pendingZ: 40
-  activeZ: 5
-  passZ: -1
-  despawnZ: -2
+  activeZ: 10
+  passZ: 2.5
+  despawnZ: 0
   pendingDuration: 2
-  activeDuration: 1
+  activeDuration: 3
   passDuration: 1
   pendingCurve:
     serializedVersion: 2
