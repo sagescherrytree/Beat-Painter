@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PaintBrush : MonoBehaviour
 {
+    public int hits;
+
+    void Start() {
+        hits = 0;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -18,6 +23,7 @@ public class PaintBrush : MonoBehaviour
             {
                 Debug.Log("Found a target!");
                 target.Hit();
+                hits++;
             }
         }
         Debug.DrawRay(transform.position, transform.forward * 100, color);

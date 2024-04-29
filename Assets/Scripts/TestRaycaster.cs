@@ -7,7 +7,7 @@ public class TestRaycaster : MonoBehaviour
     private Camera _camera;
 
     // simple counter
-    int hits;
+    public int hits;
 
 
     // Start is called before the first frame update
