@@ -9,6 +9,7 @@ public class GhostStrokeSpawner : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject ghostStrokePrefab;
     [SerializeField] private float spawnRate;
+    [SerializeField] private float offset;
     // Start is called before the first frame update
     void Start()
     {
