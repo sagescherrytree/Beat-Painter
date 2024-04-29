@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GhostStrokeSpawner : MonoBehaviour
 {
@@ -22,11 +20,16 @@ public class GhostStrokeSpawner : MonoBehaviour
         var n = initData.ids.Count;
         for (int i = 0; i < n; i++)
         {
+            var mat = initData.mats[i];
+            var translate = (Vector3) mat.GetColumn(3).normalized;
+            var rotate = Quaternion.LookRotation(mat.GetColumn(2), mat.GetColumn(1));
+            var scale = 2f;
+            
             var positions = strokePoints.strokes[initData.ids[i]].data
                 .Select(v =>
                 {
-                    var res = initData.mats[i].MultiplyPoint(v);
-                    res.z = transform.position.z;
+                    // var res = initData.mats[i].MultiplyPoint(v);
+                    var res = scale * (rotate * gameObject.transform.TransformPoint(v)) + translate;
                     return res;
                 })
                 .ToArray();

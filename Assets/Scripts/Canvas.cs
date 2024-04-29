@@ -1,23 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Canvas : MonoBehaviour
 {
-    [SerializeField] private List<Texture2D> strokes;
-    [SerializeField] private CustomRenderTexture texture;
-    [SerializeField] private Material blendMat;
-    private static readonly int PaintTex = Shader.PropertyToID("_PaintTex");
+    [SerializeField] private List<Material> materials;
+    [SerializeField] private GameObject canvasPrefab;
+    private float _spawnZ = 0;
 
-    void Start()
-    {
-        blendMat.SetTexture(PaintTex, Texture2D.blackTexture);
-        texture.Update();
-    }
-    
     public void Paint(int index)
     {
-        blendMat.SetTexture(PaintTex, strokes[index]);
-        texture.Update();
+        _spawnZ -= 0.01f;
+        var position = canvasPrefab.transform.position;
+        position.z += _spawnZ;
+        var canvasInstance = Instantiate(canvasPrefab, position, canvasPrefab.transform.rotation);
+        canvasInstance.GetComponent<MeshRenderer>().material = materials[index];
     }
 }

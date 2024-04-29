@@ -54,7 +54,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: beb92480439f24b3199e3c50b51271e0, type: 2}
+  - {fileID: 2100000, guid: 6bb9c17cf8749e74a978459cfd422ce8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1613a9f38d045cd9dcb2a3ebb776ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endZ: 20
-  speed: -2
+  endZ: 5
+  speed: -5
   targetPrefab: {fileID: 9027039027238369111, guid: edf8839129b9a4b849db80cbc3bb49e4, type: 3}
   lifeTime: 2
