@@ -7128,7 +7128,8 @@ MonoBehaviour:
   initData: {fileID: 1042608531}
   canvas: {fileID: 919563248}
   ghostStrokePrefab: {fileID: 6465562804140432840, guid: eab6fc91f591c41d3adbd0fb34fe0190, type: 3}
-  spawnRate: 2.94
+  spawnRate: 4
+  offset: 0
 --- !u!4 &1661218254
 Transform:
   m_ObjectHideFlags: 0

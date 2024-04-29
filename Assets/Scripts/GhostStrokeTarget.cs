@@ -52,7 +52,7 @@ public class GhostStrokeTarget : MonoBehaviour
 
     public void Hit()
     {
-        if (State is TargetState.Hit or TargetState.Missed)
+        if (State is TargetState.Hit or TargetState.Missed or TargetState.Inactive)
         {
             return;
         }
