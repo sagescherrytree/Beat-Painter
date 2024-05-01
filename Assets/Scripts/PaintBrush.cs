@@ -30,13 +30,13 @@ public class PaintBrush : MonoBehaviour
                 target.Hit();
                 //DestroyLastParticle();
                 // Instantiate currParticleObject.
-                currParticleObject = Instantiate(particles, hit.point, Quaternion.identity);
-                if (lastParticleObject != null)
-                {
-                    // Set lastParticleObject to currParticleObject.
-                    lastParticleObject = currParticleObject;
-                }
-                Destroy(lastParticleObject, particleLifetime);
+                // currParticleObject = Instantiate(particles, hit.point, Quaternion.identity);
+                // if (lastParticleObject != null)
+                // {
+                //     // Set lastParticleObject to currParticleObject.
+                //     lastParticleObject = currParticleObject;
+                // }
+                // Destroy(lastParticleObject, particleLifetime);
                 hits++;
             }
         }
