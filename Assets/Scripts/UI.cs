@@ -24,6 +24,7 @@ public class UI : MonoBehaviour
     }
 
     public void ReplayLevel() {
+        SetScore(0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
