@@ -14,6 +14,9 @@ public class GhostStrokeSpawner : MonoBehaviour
     [SerializeField] private float offset;
 
     [SerializeField] private PaintBrush brush;
+
+    public GameObject LossScreen;
+    public GameObject WinScreen;
     // Start is called before the first frame update
     void Start()
     {
