@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static PaintBrush;
+using static UI;
 
 public class GhostStrokeSpawner : MonoBehaviour
 {
@@ -14,9 +15,8 @@ public class GhostStrokeSpawner : MonoBehaviour
     [SerializeField] private float offset;
 
     [SerializeField] private PaintBrush brush;
-
-    public GameObject LossScreen;
-    public GameObject WinScreen;
+    [SerializeField] private UI uiManager;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -47,10 +47,11 @@ public class GhostStrokeSpawner : MonoBehaviour
         }
         
         int hits = brush.hits;
+        uiManager.SetScore(hits);
         if (hits < n) {
-            LossScreen.SetActive(true);
+            uiManager.LoseLevel();    
         } else {
-            WinScreen.SetActive(true);
+            uiManager.WinLevel();
         }       
 
     }
