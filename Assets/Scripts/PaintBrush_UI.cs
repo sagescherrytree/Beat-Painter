@@ -1,19 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PaintBrush : MonoBehaviour
+public class PaintBrush_UI : MonoBehaviour
 {
-    public int hits;
     public GameObject particles;
     public float particleLifetime = 2f;
     private GameObject currParticleObject;
     private GameObject lastParticleObject;
 
-    void Start()
-    {
-        hits = 0;
-    }
     // Update is called once per frame
     void Update()
     {
@@ -23,22 +19,11 @@ public class PaintBrush : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
             color = Color.red;
-            var target = hit.transform.gameObject.GetComponent<GhostStrokeTarget>();
+            var target = hit.transform.gameObject.GetComponent<Button>();
             if (target != null)
             {
                 Debug.Log("Found a target!");
-                target.Hit();
-                //DestroyLastParticle();
-                // Instantiate currParticleObject.
-                // currParticleObject = Instantiate(particles, hit.point, Quaternion.identity);
-                // if (lastParticleObject != null)
-                // {
-                //     // Set lastParticleObject to currParticleObject.
-                //     lastParticleObject = currParticleObject;
-                // }
-                // Destroy(lastParticleObject, particleLifetime);
-                hits++;
-                UI.manager.IncreaseScore(1);
+                target.Select();
             }
         }
         Debug.DrawRay(transform.position, transform.forward * 100, color);
