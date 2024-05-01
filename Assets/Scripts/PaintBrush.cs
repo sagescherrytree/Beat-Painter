@@ -6,6 +6,7 @@ public class PaintBrush : MonoBehaviour
 {
     public int hits;
     public ParticleSystem particles;
+    public float particleLifetime = 2f;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class PaintBrush : MonoBehaviour
                 Debug.Log("Found a target!");
                 target.Hit();
                 Instantiate(particles, hit.point, Quaternion.identity);
+                Destroy(particles, particleLifetime);
                 hits++;
             }
         }
