@@ -5,8 +5,10 @@ using UnityEngine;
 public class PaintBrush : MonoBehaviour
 {
     public int hits;
-    public ParticleSystem particles;
+    public GameObject particles;
     public float particleLifetime = 2f;
+    private GameObject currParticleObject;
+    private GameObject lastParticleObject;
 
     void Start()
     {
@@ -26,11 +28,28 @@ public class PaintBrush : MonoBehaviour
             {
                 Debug.Log("Found a target!");
                 target.Hit();
-                Instantiate(particles, hit.point, Quaternion.identity);
-                Destroy(particles, particleLifetime);
+                //DestroyLastParticle();
+                // Instantiate currParticleObject.
+                currParticleObject = Instantiate(particles, hit.point, Quaternion.identity);
+                // if (lastParticleObject != null)
+                // {
+                //     // Set lastParticleObject to currParticleObject.
+                //     lastParticleObject = currParticleObject;
+                // }
+                // Destroy(lastParticleObject, particleLifetime);
                 hits++;
             }
         }
         Debug.DrawRay(transform.position, transform.forward * 100, color);
+    }
+
+    void DestroyLastParticle()
+    {
+        // Check if the lastParticleObject exists and is not already destroyed
+        if (lastParticleObject != null && lastParticleObject.activeSelf)
+        {
+            // Destroy the last instantiated particle system
+            Destroy(lastParticleObject);
+        }
     }
 }
