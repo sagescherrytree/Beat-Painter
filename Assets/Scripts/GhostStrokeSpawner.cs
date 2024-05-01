@@ -3,7 +3,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static PaintBrush;
-using static UI;
 
 public class GhostStrokeSpawner : MonoBehaviour
 {
@@ -47,11 +46,11 @@ public class GhostStrokeSpawner : MonoBehaviour
         }
         
         int hits = brush.hits;
-        uiManager.SetScore(hits);
+        UI.manager.SetScore(hits);
         if (hits < n) {
-            uiManager.LoseLevel();    
+            UI.manager.LoseLevel();    
         } else {
-            uiManager.WinLevel();
+            UI.manager.WinLevel();
         }       
 
     }
