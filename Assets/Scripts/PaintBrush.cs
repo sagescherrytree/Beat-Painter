@@ -5,14 +5,16 @@ using UnityEngine;
 public class PaintBrush : MonoBehaviour
 {
     public int hits;
+    public ParticleSystem particles;
 
-    void Start() {
+    void Start()
+    {
         hits = 0;
     }
     // Update is called once per frame
     void Update()
     {
-        
+
         RaycastHit hit;
         Color color = Color.green;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
@@ -23,6 +25,7 @@ public class PaintBrush : MonoBehaviour
             {
                 Debug.Log("Found a target!");
                 target.Hit();
+                Instantiate(particles, hit.point, Quaternion.identity);
                 hits++;
             }
         }
