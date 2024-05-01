@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pendingZ: 40
-  activeZ: 10
+  activeZ: 8
   passZ: 2.5
   despawnZ: 0
   pendingDuration: 2
