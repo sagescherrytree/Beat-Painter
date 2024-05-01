@@ -10,6 +10,7 @@ public class UI : MonoBehaviour
     [SerializeField] public GameObject WinScreen;
 
     public static UI manager;
+    public TextMeshProUGUI lvlScoreText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highscoreText;
     public int score;
@@ -42,9 +43,11 @@ public class UI : MonoBehaviour
 
     public void SetScore(int amnt) {
         score = amnt;
+        lvlScoreText.text = "Score: " + score.ToString();
     }
 
     public void IncreaseScore(int amnt) {
         score += amnt;
+        lvlScoreText.text = "Score: " + score.ToString();
     }
 }
