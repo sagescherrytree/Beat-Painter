@@ -48,9 +48,9 @@ public class GhostStrokeSpawner : MonoBehaviour
         
         int hits = brush.hits;
         if (hits < n) {
-            SceneManager.LoadScene("LossScreen");
+            LossScreen.SetActive(true);
         } else {
-            SceneManager.LoadScene("WinScreen");
+            WinScreen.SetActive(true);
         }       
 
     }
