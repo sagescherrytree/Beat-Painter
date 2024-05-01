@@ -7,6 +7,7 @@ public class PaintBrush : MonoBehaviour
     public int hits;
     public GameObject particles;
     public float particleLifetime = 2f;
+    private GameObject currParticleObject;
     private GameObject lastParticleObject;
 
     void Start()
@@ -27,8 +28,14 @@ public class PaintBrush : MonoBehaviour
             {
                 Debug.Log("Found a target!");
                 target.Hit();
-                DestroyLastParticle();
-                lastParticleObject = Instantiate(particles, hit.point, Quaternion.identity);
+                //DestroyLastParticle();
+                // Instantiate currParticleObject.
+                currParticleObject = Instantiate(particles, hit.point, Quaternion.identity);
+                if (lastParticleObject != null)
+                {
+                    // Set lastParticleObject to currParticleObject.
+                    lastParticleObject = currParticleObject;
+                }
                 Destroy(lastParticleObject, particleLifetime);
                 hits++;
             }
