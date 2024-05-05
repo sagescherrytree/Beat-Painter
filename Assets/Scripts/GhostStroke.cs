@@ -18,6 +18,9 @@ public class GhostStroke : MonoBehaviour
     private static readonly int FillLength = Shader.PropertyToID("_FillLength");
     private const float TargetHover = 0.1f;
 
+    [SerializeField] private int numActive;
+    [SerializeField] private GameObject targetPrefab;
+
     [SerializeField] private float pendingZ;
     [SerializeField] private float activeZ;
     [SerializeField] private float passZ;
@@ -31,13 +34,11 @@ public class GhostStroke : MonoBehaviour
     [SerializeField] private AnimationCurve pendingCurve;
     [SerializeField] private AnimationCurve activeCurve;
     [SerializeField] private AnimationCurve passCurve;
-    
-    [SerializeField] private GameObject targetPrefab;
 
     private Zone _currZone;
 
     private List<GhostStrokeTarget> _targetInstances;
-    private int _activeIndex;
+    private int _firstActiveIndex;
 
     private Vector3[] _positions;
     private LineRenderer _renderer;
@@ -108,9 +109,9 @@ public class GhostStroke : MonoBehaviour
                 _currZone = Zone.Pass;
                 t = (Time.time - _zoneStartTime) / passDuration;
                 SetZ(t);
-                for (; _activeIndex < _targetInstances.Count; _activeIndex++)
+                for (; _firstActiveIndex < _targetInstances.Count; _firstActiveIndex++)
                 {
-                    _targetInstances[_activeIndex].State = TargetState.Missed;
+                    _targetInstances[_firstActiveIndex].State = TargetState.Missed;
                 }
                 break;
             case Zone.Pass:
@@ -129,7 +130,7 @@ public class GhostStroke : MonoBehaviour
         _currZone = Zone.Pending;
         _zoneStartTime = Time.time;
         
-        _activeIndex = 0;
+        _firstActiveIndex = 0;
         _targetInstances = new();
         
         _renderer = gameObject.GetComponent<LineRenderer>();
@@ -159,22 +160,25 @@ public class GhostStroke : MonoBehaviour
             target.Init(i, this);
             _targetInstances.Add(target);
         }
-        _targetInstances[0].State = TargetState.Active;
+        for (int i = 0; i < numActive; i++)
+        {
+            _targetInstances[i].State = TargetState.Active;
+        }
     }
 
     public void HitTarget(int hitIndex)
     {
-        for (var i = _activeIndex; i < hitIndex; i++)
+        for (var i = _firstActiveIndex; i < hitIndex; i++)
         {
             _targetInstances[i].State = TargetState.Missed;
         }
         _renderer.material.SetFloat(FillLength, _fillLengths[hitIndex]);
-        _activeIndex = hitIndex + 1;
-        if (_activeIndex < _targetInstances.Count)
+        _firstActiveIndex = hitIndex + 1;
+        for (int i = _firstActiveIndex; i < Mathf.Min(_firstActiveIndex + numActive, _targetInstances.Count); i++)
         {
-            _targetInstances[_activeIndex].State = TargetState.Active;
+            _targetInstances[i].State = TargetState.Active;
         }
-        else
+        if (_firstActiveIndex == _targetInstances.Count)
         {
             Complete();
         }
