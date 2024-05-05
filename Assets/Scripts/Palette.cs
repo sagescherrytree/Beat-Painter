@@ -20,68 +20,76 @@ public class Palette : MonoBehaviour
     void Start()
     {
         currColor = 1;
+        StartCoroutine(ChangeColor());
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+    private IEnumerator ChangeColor() {
+        while (true) {
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+            if (pos.x > 0 || pos.y < 0) { // right/down
+                currColor += 1;
+                if (currColor > maxColor) {
+                    currColor = 1;
+                }
+            } else if (pos.x < 0 || pos.y > 0) { // left/up
+                currColor -= 1;
+                if (currColor < 1) {
+                    currColor = maxColor;
+                }
+            }
+
+            switch (currColor) {
+                case 1:
+                    col2.DisableKeyword("_EMISSION");
+                    col8.DisableKeyword("_EMISSION");
+                    col1.EnableKeyword("_EMISSION");
+                    break;
+                case 2:
+                    col3.DisableKeyword("_EMISSION");
+                    col1.DisableKeyword("_EMISSION");
+                    col2.EnableKeyword("_EMISSION");
+                    break;
+                case 3:
+                    col4.DisableKeyword("_EMISSION");
+                    col2.DisableKeyword("_EMISSION");
+                    col3.EnableKeyword("_EMISSION");
+                    break;
+                case 4:
+                    col5.DisableKeyword("_EMISSION");
+                    col3.DisableKeyword("_EMISSION");
+                    col4.EnableKeyword("_EMISSION");
+                    break;
+                case 5:
+                    col6.DisableKeyword("_EMISSION");
+                    col4.DisableKeyword("_EMISSION");
+                    col5.EnableKeyword("_EMISSION");
+                    break;
+                case 6:
+                    col7.DisableKeyword("_EMISSION");
+                    col5.DisableKeyword("_EMISSION");
+                    col6.EnableKeyword("_EMISSION");
+                    break;
+                case 7:
+                    col8.DisableKeyword("_EMISSION");
+                    col6.DisableKeyword("_EMISSION");
+                    col7.EnableKeyword("_EMISSION");
+                    break;
+                case 8:
+                    col1.DisableKeyword("_EMISSION");
+                    col7.DisableKeyword("_EMISSION");
+                    col8.EnableKeyword("_EMISSION");
+                    break;
+            }
+            Debug.Log("changed color");
+            yield return new WaitForSeconds(0.1f);
+        }
         // left controller
-        Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-
-        if (pos.x > 0 || pos.y < 0) { // right/down
-            currColor += 1;
-            if (currColor > maxColor) {
-                currColor = 1;
-            }
-        } else if (pos.x < 0 || pos.y > 0) { // left/up
-            currColor -= 1;
-            if (currColor < 1) {
-                currColor = maxColor;
-            }
-        }
-
-        switch (currColor) {
-            case 1:
-                col2.DisableKeyword("_EMISSION");
-                col8.DisableKeyword("_EMISSION");
-                col1.EnableKeyword("_EMISSION");
-                break;
-            case 2:
-                col3.DisableKeyword("_EMISSION");
-                col1.DisableKeyword("_EMISSION");
-                col2.EnableKeyword("_EMISSION");
-                break;
-            case 3:
-                col4.DisableKeyword("_EMISSION");
-                col2.DisableKeyword("_EMISSION");
-                col3.EnableKeyword("_EMISSION");
-                break;
-            case 4:
-                col5.DisableKeyword("_EMISSION");
-                col3.DisableKeyword("_EMISSION");
-                col4.EnableKeyword("_EMISSION");
-                break;
-            case 5:
-                col6.DisableKeyword("_EMISSION");
-                col4.DisableKeyword("_EMISSION");
-                col5.EnableKeyword("_EMISSION");
-                break;
-            case 6:
-                col7.DisableKeyword("_EMISSION");
-                col5.DisableKeyword("_EMISSION");
-                col6.EnableKeyword("_EMISSION");
-                break;
-            case 7:
-                col8.DisableKeyword("_EMISSION");
-                col6.DisableKeyword("_EMISSION");
-                col7.EnableKeyword("_EMISSION");
-                break;
-            case 8:
-                col1.DisableKeyword("_EMISSION");
-                col7.DisableKeyword("_EMISSION");
-                col8.EnableKeyword("_EMISSION");
-                break;
-        }
-        Invoke("DelayedAction", 10.0f);
+        
+        
     }
 }
