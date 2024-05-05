@@ -48,7 +48,7 @@ public class GhostStrokeSpawner : MonoBehaviour
                 })
                 .ToArray();
             var ghostStroke = Instantiate(ghostStrokePrefab).GetComponent<GhostStroke>();
-            ghostStroke.Init(positions, canvas, i, initData.ids[i], swatch);
+            ghostStroke.Init(positions, canvas, i, swatch.strokeIdToColor[initData.ids[i]], swatch);
             yield return new WaitForSeconds(spawnRate);
         }
         

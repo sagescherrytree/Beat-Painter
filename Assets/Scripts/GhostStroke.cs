@@ -44,7 +44,7 @@ public class GhostStroke : MonoBehaviour
     private LineRenderer _renderer;
     private List<float> _fillLengths;
 
-    public int StrokeId { get; private set;}
+    public int ColorInd { get; private set;}
     private int _canvasIndex;
     private Canvas _canvas;
     private ColorSwatch _swatch;
@@ -122,13 +122,13 @@ public class GhostStroke : MonoBehaviour
         }
     }
 
-    public void Init(Vector3[] positions, Canvas canvas, int canvasIndex, int strokeId, ColorSwatch swatch)
+    public void Init(Vector3[] positions, Canvas canvas, int canvasIndex, int colorInd, ColorSwatch swatch)
     {
         _positions = positions;
         _canvas = canvas;
         _canvasIndex = canvasIndex;
         _swatch = swatch;
-        StrokeId = strokeId;
+        ColorInd = colorInd;
         
         _currZone = Zone.Pending;
         _zoneStartTime = Time.time;
@@ -139,7 +139,7 @@ public class GhostStroke : MonoBehaviour
         _renderer = gameObject.GetComponent<LineRenderer>();
         _renderer.positionCount = positions.Length;
         _renderer.SetPositions(positions);
-        _renderer.material.SetColor("_Color", swatch.colors[swatch.strokeIdToColor[strokeId]]);
+        _renderer.material.SetColor("_Color", swatch.colors[colorInd]);
         
         _fillLengths = new();
         var fillLength = 0f;
