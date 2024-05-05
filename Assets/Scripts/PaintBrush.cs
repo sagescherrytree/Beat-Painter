@@ -28,7 +28,7 @@ public class PaintBrush : MonoBehaviour
             if (target != null)
             {
                 Debug.Log("Found a target!");
-                target.Hit(_palette.currColor);
+                target.Hit(_palette.currColor - 1);
                 //DestroyLastParticle();
                 // Instantiate currParticleObject.
                 // currParticleObject = Instantiate(particles, hit.point, Quaternion.identity);
