@@ -9,6 +9,7 @@ public class PaintBrush : MonoBehaviour
     public float particleLifetime = 2f;
     private GameObject currParticleObject;
     private GameObject lastParticleObject;
+    [SerializeField] private Palette _palette;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class PaintBrush : MonoBehaviour
             if (target != null)
             {
                 Debug.Log("Found a target!");
-                target.Hit();
+                target.Hit(_palette.currColor);
                 //DestroyLastParticle();
                 // Instantiate currParticleObject.
                 // currParticleObject = Instantiate(particles, hit.point, Quaternion.identity);

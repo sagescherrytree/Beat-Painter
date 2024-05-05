@@ -26,7 +26,7 @@ public class TestRaycaster : MonoBehaviour
             if (Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out hit))
             {
                 var target = hit.collider.gameObject.GetComponent<GhostStrokeTarget>();
-                target.Hit();
+                target.Hit(-1);
 
                 hits++;
             }
