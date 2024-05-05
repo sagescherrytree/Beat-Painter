@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class GhostStrokeSpawner : MonoBehaviour
 
     [SerializeField] private PaintBrush brush;
     [SerializeField] private UI uiManager;
+    [SerializeField] private ColorSwatch swatch;
     
     // Start is called before the first frame update
     void Start()
@@ -46,7 +48,7 @@ public class GhostStrokeSpawner : MonoBehaviour
                 })
                 .ToArray();
             var ghostStroke = Instantiate(ghostStrokePrefab).GetComponent<GhostStroke>();
-            ghostStroke.Init(positions, canvas, i);
+            ghostStroke.Init(positions, canvas, i, initData.ids[i], swatch);
             yield return new WaitForSeconds(spawnRate);
         }
         
