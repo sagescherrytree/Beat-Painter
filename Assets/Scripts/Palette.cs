@@ -82,6 +82,6 @@ public class Palette : MonoBehaviour
                 col8.EnableKeyword("_EMISSION");
                 break;
         }
-        Invoke("DelayedAction", 1.0f);
+        Invoke("DelayedAction", 10.0f);
     }
 }
