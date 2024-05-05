@@ -14,7 +14,11 @@ public class StrokeTransformCollector : MonoBehaviour
         {
             var child = transform.GetChild(i);
             var id = child.GetComponent<StrokeQuad>().id;
-            strokeInitData.mats.Add(child.localToWorldMatrix);
+            var displacement = child.position;
+            displacement.z = 0;
+            strokeInitData.displacements.Add(displacement.normalized);
+            strokeInitData.rotations.Add(child.rotation.normalized);
+            strokeInitData.flipY.Add(child.localScale.y < 0f);
             strokeInitData.ids.Add(id);
         }
     }

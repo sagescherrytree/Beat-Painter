@@ -91,7 +91,6 @@ public class GhostStroke : MonoBehaviour
         // No state transition occurs
         if (t <= 1f)
         {
-            Debug.Log($"No state transition: {t}");
             SetZ(t);
             return;
         }

@@ -27,17 +27,22 @@ public class GhostStrokeSpawner : MonoBehaviour
         var n = initData.ids.Count;
         for (int i = 0; i < n; i++)
         {
-            var mat = initData.mats[i];
-            var translate = (Vector3) mat.GetColumn(3).normalized;
-            var rotate = Quaternion.LookRotation(mat.GetColumn(2), mat.GetColumn(1));
+            var translate = initData.displacements[i];
+            var rotate = initData.rotations[i];
+            var flipY = initData.flipY[i];
             var scale = 2f;
             
             var positions = strokePoints.strokes[initData.ids[i]].data
                 .Select(v =>
                 {
-                    // var res = initData.mats[i].MultiplyPoint(v);
-                    var res = scale * (rotate * gameObject.transform.TransformPoint(v)) + translate;
-                    return res;
+                    if (flipY)
+                    {
+                        v.y *= -1;
+                    }
+                    v = scale * (rotate * v);
+                    v = gameObject.transform.TransformPoint(v);
+                    v += translate;
+                    return v;
                 })
                 .ToArray();
             var ghostStroke = Instantiate(ghostStrokePrefab).GetComponent<GhostStroke>();
