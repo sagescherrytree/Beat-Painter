@@ -13521,14 +13521,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currColor: 1
   maxColor: 8
-  col1: {fileID: 2100000, guid: 185abefd0ce841f4d85dc4c8d4c86276, type: 2}
-  col2: {fileID: 2100000, guid: c1da89018571ee646a32c1007d749b10, type: 2}
-  col3: {fileID: 2100000, guid: 1efc03f1e33fac44ab35f6a6ced5d697, type: 2}
-  col4: {fileID: 2100000, guid: cce4ef0340f244847a556594d35d4ea6, type: 2}
-  col5: {fileID: 2100000, guid: d65e68bdfdb7ab94a91edc5efc606c7c, type: 2}
-  col6: {fileID: 2100000, guid: e9bec81c0cc38b4449dce032c774b4a3, type: 2}
-  col7: {fileID: 2100000, guid: e4388d7f614ceb942b44e8dd756d0523, type: 2}
-  col8: {fileID: 2100000, guid: 80dafdf44d4f32546bb70d684f0688bf, type: 2}
+  colors:
+  - {fileID: 2100000, guid: 185abefd0ce841f4d85dc4c8d4c86276, type: 2}
+  - {fileID: 2100000, guid: c1da89018571ee646a32c1007d749b10, type: 2}
+  - {fileID: 2100000, guid: 1efc03f1e33fac44ab35f6a6ced5d697, type: 2}
+  - {fileID: 2100000, guid: cce4ef0340f244847a556594d35d4ea6, type: 2}
+  - {fileID: 2100000, guid: d65e68bdfdb7ab94a91edc5efc606c7c, type: 2}
+  - {fileID: 2100000, guid: e9bec81c0cc38b4449dce032c774b4a3, type: 2}
+  - {fileID: 2100000, guid: e4388d7f614ceb942b44e8dd756d0523, type: 2}
+  - {fileID: 2100000, guid: 80dafdf44d4f32546bb70d684f0688bf, type: 2}
   paintbrush: {fileID: 2010477816}
   particles: {fileID: 49434719}
 --- !u!4 &1397458023 stripped

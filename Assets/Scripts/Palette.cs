@@ -5,16 +5,8 @@ using UnityEngine;
 public class Palette : MonoBehaviour
 {
     public int currColor;
-    public int maxColor;
+    public float test;
 
-    // public Material col1;
-    // public Material col2;
-    // public Material col3;
-    // public Material col4;
-    // public Material col5;
-    // public Material col6;
-    // public Material col7;
-    // public Material col8;
     public Material[] colors;
 
     public MeshRenderer paintbrush;
@@ -23,33 +15,34 @@ public class Palette : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currColor = 1;
-        StartCoroutine(ChangeColor());
+        currColor = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private IEnumerator ChangeColor() {
-        while (true) {
-            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+        int direction = 0;
+            if (OVRInput.GetDown(OVRInput.Button.Three))
+            {
+                direction += 1;
+            }
+            if (OVRInput.GetDown(OVRInput.Button.Four))
+            {
+                direction -= 1;
+            }
 
-            var direction = (int) Mathf.Sign(pos.x);
             if (direction != 0)
             {
                 colors[currColor].DisableKeyword("_EMISSION");
-                currColor = (currColor + direction) % 8;
-                var currMat = colors[currColor];
+                currColor = (currColor + direction + colors.Length) % colors.Length;
+                Material currMat = colors[currColor];
                 currMat.EnableKeyword("_EMISSION");
                 Material[] bMats = paintbrush.materials;
                 Material[] pMats = particles.materials;
                 bMats[3] = currMat;
                 pMats[0] = currMat;
+                paintbrush.materials = bMats;
+                particles.materials = pMats;
             }
-            // Debug.Log("changed color");
-            yield return new WaitForSeconds(0.1f);
-        }
     }
 }
