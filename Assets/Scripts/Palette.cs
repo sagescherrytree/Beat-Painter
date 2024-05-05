@@ -7,14 +7,15 @@ public class Palette : MonoBehaviour
     public int currColor;
     public int maxColor;
 
-    public Material col1;
-    public Material col2;
-    public Material col3;
-    public Material col4;
-    public Material col5;
-    public Material col6;
-    public Material col7;
-    public Material col8;
+    // public Material col1;
+    // public Material col2;
+    // public Material col3;
+    // public Material col4;
+    // public Material col5;
+    // public Material col6;
+    // public Material col7;
+    // public Material col8;
+    public Material[] colors;
 
     public MeshRenderer paintbrush;
     public ParticleSystemRenderer particles;
@@ -34,86 +35,21 @@ public class Palette : MonoBehaviour
     private IEnumerator ChangeColor() {
         while (true) {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-            if (pos.x > 0 || pos.y < 0) { // right/down
-                currColor += 1;
-                if (currColor > maxColor) {
-                    currColor = 1;
-                }
-            } else if (pos.x < 0 || pos.y > 0) { // left/up
-                currColor -= 1;
-                if (currColor < 1) {
-                    currColor = maxColor;
-                }
-            }
 
-            Material[] b_mats = paintbrush.materials;
-            Material[] p_mats = particles.materials;
-            switch (currColor) {
-                case 1:
-                    col2.DisableKeyword("_EMISSION");
-                    col8.DisableKeyword("_EMISSION");
-                    col1.EnableKeyword("_EMISSION");
-                    b_mats[3] = col1;
-                    p_mats[0] = col1;
-                    break;
-                case 2:
-                    col3.DisableKeyword("_EMISSION");
-                    col1.DisableKeyword("_EMISSION");
-                    col2.EnableKeyword("_EMISSION");
-                    b_mats[3] = col2;
-                    p_mats[0] = col2;
-                    break;
-                case 3:
-                    col4.DisableKeyword("_EMISSION");
-                    col2.DisableKeyword("_EMISSION");
-                    col3.EnableKeyword("_EMISSION");
-                    b_mats[3] = col3;
-                    p_mats[0] = col3;
-                    break;
-                case 4:
-                    col5.DisableKeyword("_EMISSION");
-                    col3.DisableKeyword("_EMISSION");
-                    col4.EnableKeyword("_EMISSION");
-                    b_mats[3] = col4;
-                    p_mats[0] = col4;
-                    break;
-                case 5:
-                    col6.DisableKeyword("_EMISSION");
-                    col4.DisableKeyword("_EMISSION");
-                    col5.EnableKeyword("_EMISSION");
-                    b_mats[3] = col5;
-                    p_mats[0] = col5;
-                    break;
-                case 6:
-                    col7.DisableKeyword("_EMISSION");
-                    col5.DisableKeyword("_EMISSION");
-                    col6.EnableKeyword("_EMISSION");
-                    b_mats[3] = col6;
-                    p_mats[0] = col6;
-                    break;
-                case 7:
-                    col8.DisableKeyword("_EMISSION");
-                    col6.DisableKeyword("_EMISSION");
-                    col7.EnableKeyword("_EMISSION");
-                    b_mats[3] = col7;
-                    p_mats[0] = col7;
-                    break;
-                case 8:
-                    col1.DisableKeyword("_EMISSION");
-                    col7.DisableKeyword("_EMISSION");
-                    col8.EnableKeyword("_EMISSION");
-                    b_mats[3] = col8;
-                    p_mats[0] = col8;
-                    break;
+            var direction = (int) Mathf.Sign(pos.x);
+            if (direction != 0)
+            {
+                colors[currColor].DisableKeyword("_EMISSION");
+                currColor = (currColor + direction) % 8;
+                var currMat = colors[currColor];
+                currMat.EnableKeyword("_EMISSION");
+                Material[] bMats = paintbrush.materials;
+                Material[] pMats = particles.materials;
+                bMats[3] = currMat;
+                pMats[0] = currMat;
             }
-            paintbrush.materials = b_mats;
-            particles.materials = p_mats;
-
-            Debug.Log("changed color");
+            // Debug.Log("changed color");
             yield return new WaitForSeconds(0.1f);
         }
-        // left controller
-        
-        
     }
 }
