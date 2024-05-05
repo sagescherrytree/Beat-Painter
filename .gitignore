@@ -73,3 +73,4 @@ crashlytics-build.properties
 
 # Meta Quest Oculus
 /[Aa]ssets/Oculus/OculusProjectConfig.asset
+Assets/Scenes/Level1_Update.unity
