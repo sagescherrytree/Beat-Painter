@@ -30,6 +30,6 @@ public class Palette : MonoBehaviour
                 currColor = maxColor;
             }
         }
-        Invoke("DelayedAction", 0.25f);
+        Invoke("DelayedAction", 1.0f);
     }
 }
