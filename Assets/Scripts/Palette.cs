@@ -107,6 +107,7 @@ public class Palette : MonoBehaviour
                     break;
             }
             paintbrush.materials = b_mats;
+            particles.materials = p_mats;
 
             Debug.Log("changed color");
             yield return new WaitForSeconds(0.1f);
