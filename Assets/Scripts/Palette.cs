@@ -17,6 +17,7 @@ public class Palette : MonoBehaviour
     public Material col8;
 
     public MeshRenderer paintbrush;
+    public ParticleSystemRenderer particles;
 
     // Start is called before the first frame update
     void Start()
@@ -45,58 +46,68 @@ public class Palette : MonoBehaviour
                 }
             }
 
-            Material[] mats = paintbrush.materials;
+            Material[] b_mats = paintbrush.materials;
+            Material[] p_mats = particles.materials;
             switch (currColor) {
                 case 1:
                     col2.DisableKeyword("_EMISSION");
                     col8.DisableKeyword("_EMISSION");
                     col1.EnableKeyword("_EMISSION");
-                    mats[3] = col1;
+                    b_mats[3] = col1;
+                    p_mats[0] = col1;
                     break;
                 case 2:
                     col3.DisableKeyword("_EMISSION");
                     col1.DisableKeyword("_EMISSION");
                     col2.EnableKeyword("_EMISSION");
-                    mats[3] = col2;
+                    b_mats[3] = col2;
+                    p_mats[0] = col2;
                     break;
                 case 3:
                     col4.DisableKeyword("_EMISSION");
                     col2.DisableKeyword("_EMISSION");
                     col3.EnableKeyword("_EMISSION");
-                    mats[3] = col3;
+                    b_mats[3] = col3;
+                    p_mats[0] = col3;
                     break;
                 case 4:
                     col5.DisableKeyword("_EMISSION");
                     col3.DisableKeyword("_EMISSION");
                     col4.EnableKeyword("_EMISSION");
-                    mats[3] = col4;
+                    b_mats[3] = col4;
+                    p_mats[0] = col4;
                     break;
                 case 5:
                     col6.DisableKeyword("_EMISSION");
                     col4.DisableKeyword("_EMISSION");
                     col5.EnableKeyword("_EMISSION");
-                    mats[3] = col5;
+                    b_mats[3] = col5;
+                    p_mats[0] = col5;
                     break;
                 case 6:
                     col7.DisableKeyword("_EMISSION");
                     col5.DisableKeyword("_EMISSION");
                     col6.EnableKeyword("_EMISSION");
-                    mats[3] = col6;
+                    b_mats[3] = col6;
+                    p_mats[0] = col6;
                     break;
                 case 7:
                     col8.DisableKeyword("_EMISSION");
                     col6.DisableKeyword("_EMISSION");
                     col7.EnableKeyword("_EMISSION");
-                    mats[3] = col7;
+                    b_mats[3] = col7;
+                    p_mats[0] = col7;
                     break;
                 case 8:
                     col1.DisableKeyword("_EMISSION");
                     col7.DisableKeyword("_EMISSION");
                     col8.EnableKeyword("_EMISSION");
-                    mats[3] = col8;
+                    b_mats[3] = col8;
+                    p_mats[0] = col8;
                     break;
             }
-            paintbrush.materials = mats;
+            paintbrush.materials = b_mats;
+            particles.materials = p_mats;
 
             Debug.Log("changed color");
             yield return new WaitForSeconds(0.1f);

@@ -5573,7 +5573,7 @@ RectTransform:
   m_GameObject: {fileID: 284717127}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.195399, y: 2.681258, z: 2.681258}
+  m_LocalScale: {x: 8.986426, y: 2.681258, z: 2.681258}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 729764575}
@@ -5603,7 +5603,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 276afa480793819498e951793237f5bd, type: 3}
+  m_Texture: {fileID: 2800000, guid: 9bf05c9916d1bd041a1a0248451ea8d1, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -6267,8 +6267,8 @@ RectTransform:
   m_GameObject: {fileID: 397520663}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.013495908, y: 0.010794999, z: 0.010794999}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1805656485}
   - {fileID: 1736188788}
@@ -6985,8 +6985,8 @@ RectTransform:
   m_GameObject: {fileID: 729764574}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.013909158, y: 0.011237, z: 0.011237}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 284717128}
   - {fileID: 659662383}
@@ -14813,7 +14813,7 @@ RectTransform:
   m_GameObject: {fileID: 1805656484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.190151, y: 2.6734128, z: 1.1591}
+  m_LocalScale: {x: 8.94782, y: 2.6734128, z: 1.1591}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 397520664}
@@ -14843,7 +14843,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 276afa480793819498e951793237f5bd, type: 3}
+  m_Texture: {fileID: 2800000, guid: 9bf05c9916d1bd041a1a0248451ea8d1, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
