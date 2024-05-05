@@ -25,6 +25,9 @@ public class Palette : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        changeColor();
+    }
+    void changeColor() {
         // left controller
         Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
 
@@ -82,6 +85,7 @@ public class Palette : MonoBehaviour
                 col8.EnableKeyword("_EMISSION");
                 break;
         }
-        Invoke("DelayedAction", 10.0f);
+        yield return new WaitForSeconds(1.0);
+        Debug.Log("changed color");
     }
 }
