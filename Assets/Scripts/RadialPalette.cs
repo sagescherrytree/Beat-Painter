@@ -22,67 +22,80 @@ public class RadialPalette : MonoBehaviour
     {
         Vector2 joystickDir = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
         joystickDir.Normalize();
-        float angle = Mathf.Atan2(joystickDir.x, joystickDir.y);
-        float deg = angle * Mathf.Rad2Deg;
-        deg = deg % 360;
-        Debug.Log("Angle: " + deg);
+        float angle = Mathf.Atan2(joystickDir.y, joystickDir.x) * Mathf.Rad2Deg;
+        if (angle < 0f)
+            angle += 360f;
 
-        float span = 360 / 8; // 45 degrees.
+        // Determine the selected color based on the angle
+        currColor = Mathf.FloorToInt(angle / 45f) % numberOfColors;
+
+        if (currColor != prevColor)
+        {
+            // Update materials only when the color changes
+            UpdateMaterials();
+            prevColor = currColor;
+        }
 
         // The stupid way.
-        if (deg >= 0f && deg <= span)
-        {
+        // float angle = Mathf.Atan2(joystickDir.x, joystickDir.y);
+        // float deg = angle * Mathf.Rad2Deg;
+        // deg = deg % 360;
+        // Debug.Log("Angle: " + deg);
 
-            prevColor = currColor;
-            currColor = 0;
-            UpdateMaterials();
-        }
-        else if (deg >= span && deg <= span + 1)
-        {
-            prevColor = currColor;
-            currColor = 1;
-            UpdateMaterials();
-        }
-        else if (deg >= span + 1 && deg <= span + 2)
-        {
-            prevColor = currColor;
-            currColor = 2;
-            UpdateMaterials();
-        }
-        else if (deg >= span + 2 && deg <= span + 3)
-        {
-            prevColor = currColor;
-            currColor = 3;
-            UpdateMaterials();
-        }
-        else if (deg >= span + 3 && deg <= span + 4)
-        {
-            prevColor = currColor;
-            currColor = 4;
-            UpdateMaterials();
-        }
-        else if (deg >= span + 4 && deg <= span + 5)
-        {
-            prevColor = currColor;
-            currColor = 5;
-            UpdateMaterials();
-        }
-        else if (deg >= span + 5 && deg <= span + 6)
-        {
-            prevColor = currColor;
-            currColor = 6;
-            UpdateMaterials();
-        }
-        else if (deg >= span + 6 && deg <= span + 7)
-        {
-            prevColor = currColor;
-            currColor = 7;
-            UpdateMaterials();
-        }
-        else
-        {
-            Debug.Log("Radial palette out of bounds.");
-        }
+        // float span = 360 / 8; // 45 degrees.
+        // if (deg >= 0f && deg <= span)
+        // {
+
+        //     prevColor = currColor;
+        //     currColor = 0;
+        //     UpdateMaterials();
+        // }
+        // else if (deg >= span && deg <= span + 1)
+        // {
+        //     prevColor = currColor;
+        //     currColor = 1;
+        //     UpdateMaterials();
+        // }
+        // else if (deg >= span + 1 && deg <= span + 2)
+        // {
+        //     prevColor = currColor;
+        //     currColor = 2;
+        //     UpdateMaterials();
+        // }
+        // else if (deg >= span + 2 && deg <= span + 3)
+        // {
+        //     prevColor = currColor;
+        //     currColor = 3;
+        //     UpdateMaterials();
+        // }
+        // else if (deg >= span + 3 && deg <= span + 4)
+        // {
+        //     prevColor = currColor;
+        //     currColor = 4;
+        //     UpdateMaterials();
+        // }
+        // else if (deg >= span + 4 && deg <= span + 5)
+        // {
+        //     prevColor = currColor;
+        //     currColor = 5;
+        //     UpdateMaterials();
+        // }
+        // else if (deg >= span + 5 && deg <= span + 6)
+        // {
+        //     prevColor = currColor;
+        //     currColor = 6;
+        //     UpdateMaterials();
+        // }
+        // else if (deg >= span + 6 && deg <= span + 7)
+        // {
+        //     prevColor = currColor;
+        //     currColor = 7;
+        //     UpdateMaterials();
+        // }
+        // else
+        // {
+        //     Debug.Log("Radial palette out of bounds.");
+        // }
     }
 
     void UpdateMaterials()
