@@ -39,16 +39,16 @@ public class UI : MonoBehaviour
 
     public void WinLevel() {
         WinScreen.SetActive(true);
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = score.ToString();
     }
 
     public void SetScore(int amnt) {
         score = amnt;
-        lvlScoreText.text = "Score: " + score.ToString();
+        lvlScoreText.text = score.ToString();
     }
 
     public void IncreaseScore(int amnt) {
         score += amnt;
-        lvlScoreText.text = "Score: " + score.ToString();
+        lvlScoreText.text = score.ToString();
     }
 }
