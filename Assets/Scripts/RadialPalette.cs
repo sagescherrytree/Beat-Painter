@@ -27,7 +27,7 @@ public class RadialPalette : MonoBehaviour
             angle += 360f;
 
         // Determine the selected color based on the angle
-        currColor = Mathf.FloorToInt(angle / 45f) % numberOfColors;
+        currColor = Mathf.FloorToInt(angle / 45f) % 8;
 
         if (currColor != prevColor)
         {
