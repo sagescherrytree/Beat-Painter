@@ -23,8 +23,9 @@ public class RadialPalette : MonoBehaviour
         Vector2 joystickDir = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
         joystickDir.Normalize();
         float angle = Mathf.Atan2(joystickDir.y, joystickDir.x) * Mathf.Rad2Deg;
-        if (angle < 0f)
+        if (angle < 0f) {
             angle += 360f;
+        }
 
         // Determine the selected color based on the angle
         currColor = Mathf.FloorToInt(angle / 45f) % 8;
