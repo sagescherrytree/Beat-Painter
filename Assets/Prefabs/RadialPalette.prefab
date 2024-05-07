@@ -744,7 +744,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3184118757880703517}
-  - component: {fileID: 9163857516015923484}
   m_Layer: 0
   m_Name: RadialPalette
   m_TagString: Untagged
@@ -776,30 +775,6 @@ Transform:
   - {fileID: 7682318001677342626}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9163857516015923484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7121671379408137112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39610ac9f5bd0584e9d9e92875173c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currColor: 0
-  colours:
-  - {fileID: 6278783790820075178}
-  - {fileID: 7345467554121054568}
-  - {fileID: 577611859194374507}
-  - {fileID: 5258674520149464033}
-  - {fileID: 2790381290342743250}
-  - {fileID: 2218503042320411873}
-  - {fileID: 5866658677652990234}
-  - {fileID: 3363668395856294375}
-  paintbrush: {fileID: 0}
-  particles: {fileID: 0}
 --- !u!1 &7345467554121054568
 GameObject:
   m_ObjectHideFlags: 0

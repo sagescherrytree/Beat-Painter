@@ -10,7 +10,6 @@ public class PaletteMerge : MonoBehaviour
 
     public MeshRenderer paintbrush;
     public ParticleSystemRenderer particles;
-    private int prevColor;
 
     // Start is called before the first frame update
     void Start()
@@ -23,48 +22,47 @@ public class PaletteMerge : MonoBehaviour
     {
         ////// joystick implementation
         Vector2 joystickDir = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-        joystickDir.Normalize();
-        float angle = Mathf.Atan2(joystickDir.y, joystickDir.x) * Mathf.Rad2Deg;
-        if (angle < 0f) {
-            angle += 360f;
-        }
 
-        if (joystickDir.x != 0 && joystickDir.y != 0) {
-            // Determine the selected color based on the angle
-            currColor = Mathf.FloorToInt(angle / 45f) % 8;
-        }
-
-        if (currColor != prevColor)
+        if (joystickDir.magnitude > 0.5)
         {
-            // Update materials only when the color changes
-            UpdateMaterials();
-            prevColor = currColor;
-        }
-
-
-        // button implementation
-        int direction = 0;
-        if (OVRInput.GetDown(OVRInput.Button.Four))
+            float angle = Mathf.Atan2(joystickDir.y, joystickDir.x) * Mathf.Rad2Deg;
+            if (angle < 0f) {
+                angle += 360f;
+            }
+            var color = Mathf.FloorToInt(angle / 45f);
+            if (color == 0)
+            {
+                Debug.Log("Joystick sets to red");
+            }
+            UpdateMaterials(color);
+        } else
         {
-            prevColor = currColor;
-            direction += 1;
-        }
-        if (OVRInput.GetDown(OVRInput.Button.Three))
-        {
-            prevColor = currColor;
-            direction -= 1;
-        }
-
-        if (direction != 0)
-        {
-            currColor = (currColor + direction + colors.Length) % colors.Length;
-            UpdateMaterials();
+            int direction = 0;
+            if (OVRInput.GetDown(OVRInput.Button.Four))
+            {
+                direction += 1;
+            }
+            if (OVRInput.GetDown(OVRInput.Button.Three))
+            {
+                direction -= 1;
+            }
+            var color = (currColor + direction + colors.Length) % colors.Length;
+            if (color == 0)
+            {
+                Debug.Log($"Button sets to red: currColor: {currColor}, direction: {direction}, colorsLen: {colors.Length}");
+            }
+            UpdateMaterials(color);
         }
     }
 
-    void UpdateMaterials()
+    void UpdateMaterials(int color)
     {
-        colors[prevColor].GetComponent<Renderer>().material.DisableKeyword("_EMISSION"); // Disable prev colour mat.
+        if (color == currColor)
+        {
+            return;
+        }
+        colors[currColor].GetComponent<Renderer>().material.DisableKeyword("_EMISSION"); // Disable prev colour mat.
+        currColor = color;
         Material currMat = colors[currColor].GetComponent<Renderer>().material;
         currMat.EnableKeyword("_EMISSION"); // Enable curr colour mat.
         Material[] bMats = paintbrush.materials;

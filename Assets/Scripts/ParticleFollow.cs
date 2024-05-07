@@ -17,7 +17,7 @@ public class ParticleFollow : MonoBehaviour
     {
         if (toFollow != null)
         {
-            Debug.Log("Target pos: " + toFollow.transform.position);
+            // Debug.Log("Target pos: " + toFollow.transform.position);
             transform.position = toFollow.transform.position;
             transform.rotation = toFollow.transform.rotation;
         }
