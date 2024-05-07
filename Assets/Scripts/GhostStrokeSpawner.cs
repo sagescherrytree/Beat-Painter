@@ -11,7 +11,7 @@ public class GhostStrokeSpawner : MonoBehaviour
     [SerializeField] private StrokeInitData initData;
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject ghostStrokePrefab;
-    [SerializeField] private float spawnRate;
+    [SerializeField] private float spawnInterval;
     [SerializeField] private float offset;
 
     [SerializeField] private PaintBrush brush;
@@ -49,11 +49,12 @@ public class GhostStrokeSpawner : MonoBehaviour
                 .ToArray();
             var ghostStroke = Instantiate(ghostStrokePrefab).GetComponent<GhostStroke>();
             ghostStroke.Init(positions, canvas, i, swatch.strokeIdToColor[initData.ids[i]], swatch);
-            yield return new WaitForSeconds(spawnRate);
+            yield return new WaitForSeconds(spawnInterval);
         }
         
         int hits = brush.hits;
         UI.manager.SetScore(hits);
+        yield return new WaitForSeconds(spawnInterval);
         if (hits < n) {
             UI.manager.LoseLevel();    
         } else {
