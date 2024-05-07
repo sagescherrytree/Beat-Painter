@@ -10,7 +10,8 @@ public class PaintBrush : MonoBehaviour
     public float particleLifetime = 2f;
     private GameObject currParticleObject;
     private GameObject lastParticleObject;
-    [SerializeField] private Palette _palette;
+    [SerializeField] private PaletteMerge _palette;
+    //[SerializeField] private Palette _palette;
     
     [SerializeField] private HapticClip _hapticClip;
     private HapticClipPlayer _hapticPlayer;

@@ -44,12 +44,12 @@ public class PaletteMerge : MonoBehaviour
 
         // button implementation
         int direction = 0;
-        if (OVRInput.GetDown(OVRInput.Button.Three))
+        if (OVRInput.GetDown(OVRInput.Button.Four))
         {
             prevColor = currColor;
             direction += 1;
         }
-        if (OVRInput.GetDown(OVRInput.Button.Four))
+        if (OVRInput.GetDown(OVRInput.Button.Three))
         {
             prevColor = currColor;
             direction -= 1;
