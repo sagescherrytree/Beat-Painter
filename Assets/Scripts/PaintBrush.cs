@@ -28,7 +28,7 @@ public class PaintBrush : MonoBehaviour
             if (target != null)
             {
                 // Debug.Log("Found a target!");
-                if (target.Hit(_palette.currColor - 1))
+                if (target.Hit(_palette.currColor))
                 {
                     hits++;
                     UI.manager.IncreaseScore(1);

@@ -153,8 +153,8 @@ MonoBehaviour:
   activeZ: 8
   passZ: 2.5
   despawnZ: 0
-  pendingDuration: 2
-  activeDuration: 5
+  pendingDuration: 2.285714
+  activeDuration: 2.285714
   passDuration: 0.2
   pendingCurve:
     serializedVersion: 2
