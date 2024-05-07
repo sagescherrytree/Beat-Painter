@@ -5,7 +5,7 @@ using Oculus.Haptics;
 
 public class PaintBrush : MonoBehaviour
 {
-    public int hits;
+    // public int hits;
     public GameObject particles;
     public float particleLifetime = 2f;
     private GameObject currParticleObject;
@@ -18,41 +18,29 @@ public class PaintBrush : MonoBehaviour
 
     void Start()
     {
-        hits = 0;
+        // hits = 0;
         _hapticPlayer = new(_hapticClip);
     }
     // Update is called once per frame
     void Update()
     {
-
-        RaycastHit hit;
-        Color color = Color.green;
-        if (Physics.Raycast(transform.position, transform.forward, out hit))
+        // Color color = Color.green;
+        if (Physics.Raycast(transform.position, transform.forward, out var hit))
         {
-            color = Color.red;
+            // color = Color.red;
             var target = hit.transform.gameObject.GetComponent<GhostStrokeTarget>();
             if (target != null)
             {
-                // Debug.Log("Found a target!");
                 if (target.Hit(_palette.currColor))
                 {
-                    hits++;
-                    UI.manager.IncreaseScore(1);
+                    // hits++;
+                    // UI.manager.IncreaseScore(1);
                     _hapticPlayer.Play(Controller.Right);
                 }
-                //DestroyLastParticle();
-                // Instantiate currParticleObject.
-                // currParticleObject = Instantiate(particles, hit.point, Quaternion.identity);
-                // if (lastParticleObject != null)
-                // {
-                //     // Set lastParticleObject to currParticleObject.
-                //     lastParticleObject = currParticleObject;
-                // }
-                // Destroy(lastParticleObject, particleLifetime);
-                
+
             }
         }
-        Debug.DrawRay(transform.position, transform.forward * 100, color);
+        // Debug.DrawRay(transform.position, transform.forward * 100, color);
     }
 
     void DestroyLastParticle()
