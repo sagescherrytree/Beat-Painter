@@ -8,6 +8,7 @@ public class UI : MonoBehaviour
     
     [SerializeField] public GameObject LossScreen;
     [SerializeField] public GameObject WinScreen;
+    [SerializeField] public GameObject UIHelpers;
 
     public static UI manager;
     public TextMeshProUGUI lvlScoreText;
@@ -35,11 +36,13 @@ public class UI : MonoBehaviour
 
     public void LoseLevel() {
         LossScreen.SetActive(true);
+        UIHelpers.SetActive(true);
     }
 
     public void WinLevel() {
         WinScreen.SetActive(true);
         scoreText.text = score.ToString();
+        UIHelpers.SetActive(true);
     }
 
     public void SetScore(int amnt) {
