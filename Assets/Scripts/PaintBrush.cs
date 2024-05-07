@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Oculus.Haptics;
 
 public class PaintBrush : MonoBehaviour
 {
@@ -10,10 +11,14 @@ public class PaintBrush : MonoBehaviour
     private GameObject currParticleObject;
     private GameObject lastParticleObject;
     [SerializeField] private Palette _palette;
+    
+    [SerializeField] private HapticClip _hapticClip;
+    private HapticClipPlayer _hapticPlayer;
 
     void Start()
     {
         hits = 0;
+        _hapticPlayer = new(_hapticClip);
     }
     // Update is called once per frame
     void Update()
@@ -32,6 +37,7 @@ public class PaintBrush : MonoBehaviour
                 {
                     hits++;
                     UI.manager.IncreaseScore(1);
+                    _hapticPlayer.Play(Controller.Right);
                 }
                 //DestroyLastParticle();
                 // Instantiate currParticleObject.
