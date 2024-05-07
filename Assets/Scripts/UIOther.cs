@@ -27,4 +27,11 @@ public class UIOther : MonoBehaviour
         Application.Quit();
         Debug.Log("Quit game.");
     }
+
+    public void showComponent(GameObject comp) {
+        comp.SetActive(true);
+    }
+    public void hideComponent(GameObject comp) {
+        comp.SetActive(false);
+    }
 }
