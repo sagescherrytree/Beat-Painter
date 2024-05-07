@@ -50,15 +50,16 @@ public class GhostStrokeTarget : MonoBehaviour
         State = TargetState.Inactive;
     }
 
-    public void Hit(int colorIndex)
+    public bool Hit(int colorIndex)
     {
         // this -1 is for the test scene without a palette
         bool colorMatch = colorIndex == -1 || colorIndex == _owner.ColorInd;
         if (State is TargetState.Hit or TargetState.Missed or TargetState.Inactive || !colorMatch)
         {
-            return;
+            return false;
         }
         State = TargetState.Hit;
         _owner.HitTarget(_index);
+        return true;
     }
 }

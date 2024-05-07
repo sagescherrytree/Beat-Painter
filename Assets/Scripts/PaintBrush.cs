@@ -27,8 +27,12 @@ public class PaintBrush : MonoBehaviour
             var target = hit.transform.gameObject.GetComponent<GhostStrokeTarget>();
             if (target != null)
             {
-                Debug.Log("Found a target!");
-                target.Hit(_palette.currColor);
+                // Debug.Log("Found a target!");
+                if (target.Hit(_palette.currColor - 1))
+                {
+                    hits++;
+                    UI.manager.IncreaseScore(1);
+                }
                 //DestroyLastParticle();
                 // Instantiate currParticleObject.
                 // currParticleObject = Instantiate(particles, hit.point, Quaternion.identity);
@@ -38,8 +42,7 @@ public class PaintBrush : MonoBehaviour
                 //     lastParticleObject = currParticleObject;
                 // }
                 // Destroy(lastParticleObject, particleLifetime);
-                hits++;
-                UI.manager.IncreaseScore(1);
+                
             }
         }
         Debug.DrawRay(transform.position, transform.forward * 100, color);
