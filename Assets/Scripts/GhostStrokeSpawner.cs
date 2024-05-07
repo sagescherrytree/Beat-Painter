@@ -55,7 +55,10 @@ public class GhostStrokeSpawner : MonoBehaviour
         int hits = brush.hits;
         UI.manager.SetScore(hits);
         yield return new WaitForSeconds(spawnInterval);
-        if (hits < n) {
+        // int hits = brush.hits;
+        // UI.manager.SetScore(hits);
+        
+        if (UI.manager.score < n) {
             UI.manager.LoseLevel();    
         } else {
             UI.manager.WinLevel();

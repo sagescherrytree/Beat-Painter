@@ -34,7 +34,7 @@ public class GhostStroke : MonoBehaviour
     [SerializeField] private AnimationCurve pendingCurve;
     [SerializeField] private AnimationCurve activeCurve;
     [SerializeField] private AnimationCurve passCurve;
-
+    
     private Zone _currZone;
 
     private List<GhostStrokeTarget> _targetInstances;
@@ -47,7 +47,6 @@ public class GhostStroke : MonoBehaviour
     public int ColorInd { get; private set;}
     private int _canvasIndex;
     private Canvas _canvas;
-    private ColorSwatch _swatch;
 
     private float GetDuration(Zone zone)
     {
@@ -127,7 +126,6 @@ public class GhostStroke : MonoBehaviour
         _positions = positions;
         _canvas = canvas;
         _canvasIndex = canvasIndex;
-        _swatch = swatch;
         ColorInd = colorInd;
         
         _currZone = Zone.Pending;
@@ -191,10 +189,12 @@ public class GhostStroke : MonoBehaviour
     private void Complete()
     {
         var hitTargets = _targetInstances.Count(target => target.State == TargetState.Hit);
-        if (hitTargets > _targetInstances.Count / 2)
+        var score = 10 * (hitTargets + _targetInstances.Count - 1) / _targetInstances.Count;
+        if (score > 5)
         {
             _canvas.Paint(_canvasIndex);
         }
+        UI.manager.IncreaseScore(score);
         Destroy(gameObject);
     }
 
