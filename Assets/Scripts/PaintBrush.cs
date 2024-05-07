@@ -19,7 +19,10 @@ public class PaintBrush : MonoBehaviour
     void Start()
     {
         // hits = 0;
-        _hapticPlayer = new(_hapticClip);
+        if (_hapticClip != null)
+        {
+            _hapticPlayer = new(_hapticClip);
+        }
     }
     // Update is called once per frame
     void Update()

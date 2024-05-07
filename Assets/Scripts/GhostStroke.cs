@@ -189,7 +189,7 @@ public class GhostStroke : MonoBehaviour
     private void Complete()
     {
         var hitTargets = _targetInstances.Count(target => target.State == TargetState.Hit);
-        var score = 10 * (hitTargets + _targetInstances.Count - 1) / _targetInstances.Count;
+        var score = (10 * hitTargets + _targetInstances.Count - 1) / _targetInstances.Count;
         if (score > 5)
         {
             _canvas.Paint(_canvasIndex);

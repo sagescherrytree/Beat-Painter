@@ -14,18 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelSelectScreen.unity
     guid: 80aaad728ca939047a30681ab4c06169
-  - enabled: 0
-    path: Assets/Scenes/LossScreen.unity
-    guid: d004f059a5878d14f8e07568450ebafc
-  - enabled: 0
-    path: Assets/Scenes/WinScreen.unity
-    guid: 5cb1c8749ebe91a4d853814797c4143c
-  - enabled: 0
-    path: Assets/Scenes/Level1.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Level1_Update_Hard.unity
-    guid: eb7dccdd977b00f44a94db57aa040c45
+    guid: ffce0c252fa9e9543857da06576a97b2
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: aacf43176268bf741ac568fc64779f4b, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 86b73507173ff97448a29ddfe5f9908a, type: 2}

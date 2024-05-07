@@ -52,8 +52,6 @@ public class GhostStrokeSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
         
-        int hits = brush.hits;
-        UI.manager.SetScore(hits);
         yield return new WaitForSeconds(spawnInterval);
         // int hits = brush.hits;
         // UI.manager.SetScore(hits);
